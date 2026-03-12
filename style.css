@@ -1,0 +1,508 @@
+:root {
+    --bg: #07080d;
+    --panel: rgba(255, 255, 255, 0.08);
+    --panel-border: rgba(255, 255, 255, 0.12);
+    --text: #f7f8fb;
+    --muted: rgba(255, 255, 255, 0.68);
+    --shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
+  
+    --iphone-width: 390px;
+    --iphone-height: 844px;
+    --iphone-radius: 42px;
+    --header-height: 60px;
+  }
+  
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html,
+  body {
+    margin: 0;
+    height: 100%;
+    font-family: Inter, system-ui, sans-serif;
+    background: #020308;
+    color: var(--text);
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 30px 16px;
+  }
+  
+  /* BACKGROUND */
+  
+  .bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  
+  .orb-a {
+    width: 240px;
+    height: 240px;
+    background: #7e8cff;
+    top: 5%;
+    left: 4%;
+  }
+  
+  .orb-b {
+    width: 280px;
+    height: 280px;
+    background: #ff8bd8;
+    top: 20%;
+    right: 4%;
+  }
+  
+  .orb-c {
+    width: 240px;
+    height: 240px;
+    background: #69f7d4;
+    bottom: 10%;
+    left: 30%;
+  }
+  
+  /* IPHONE FRAME */
+  
+  .app-shell {
+    width: 100%;
+    max-width: var(--iphone-width);
+    height: var(--iphone-height);
+    border-radius: var(--iphone-radius);
+    overflow: hidden;
+    position: relative;
+    background:
+      radial-gradient(circle at top left, rgba(111,131,255,0.16), transparent 30%),
+      radial-gradient(circle at top right, rgba(255,127,199,0.14), transparent 28%),
+      radial-gradient(circle at bottom center, rgba(103,255,218,0.12), transparent 30%),
+      var(--bg);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 30px 90px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  
+  /* HEADER FIXE */
+  
+  .iphone-header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 30;
+  }
+  
+  .iphone-header::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 126px;
+    height: 32px;
+    background: black;
+    border-radius: 0 0 20px 20px;
+  }
+  
+  /* STATUS BAR */
+  
+  .iphone-status-bar {
+    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  .status-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* SIGNAL */
+  
+  .signal {
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+  }
+  
+  .signal span {
+    width: 3px;
+    background: white;
+  }
+  
+  .signal span:nth-child(1) { height: 4px; opacity: .5; }
+  .signal span:nth-child(2) { height: 6px; opacity: .7; }
+  .signal span:nth-child(3) { height: 8px; opacity: .85; }
+  .signal span:nth-child(4) { height: 10px; }
+  
+  /* WIFI */
+  
+  .wifi {
+    position: relative;
+    width: 18px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(2px);
+  }
+  
+  .wifi-arc {
+    position: absolute;
+    border: 2px solid white;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom: none;
+    border-radius: 50%;
+  }
+  
+  .arc1 {
+    width: 16px;
+    height: 16px;
+    top: 0px;
+    opacity: .6;
+  }
+  
+  .arc2 {
+    width: 10px;
+    height: 10px;
+    top: 4px;
+  }
+  
+  .wifi-dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    bottom: 3px;
+  }
+  
+  /* BATTERY */
+  
+  .battery {
+    width: 22px;
+    height: 11px;
+    border: 1.6px solid white;
+    border-radius: 3px;
+    position: relative;
+  }
+  
+  .battery::after {
+    content: "";
+    position: absolute;
+    right: -3px;
+    top: 2px;
+    width: 2px;
+    height: 5px;
+    background: white;
+  }
+  
+  .battery-level {
+    width: 70%;
+    height: 100%;
+    background: white;
+  }
+  
+  /* SCROLLABLE CONTENT + ANCRAGE FLUIDE */
+  
+  .app-content {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    padding: calc(var(--header-height) + 24px) 26px 48px;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
+  
+  .app-content::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* HERO */
+  
+  .hero {
+    margin-bottom: 36px;
+  }
+  
+  .hero h1 {
+    font-size: 2.6rem;
+    margin: 8px 0 12px;
+  }
+  
+  .lead {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .7;
+  }
+  
+  /* NAV */
+  
+  .top-nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.07);
+    color: white;
+    cursor: pointer;
+  }
+  
+  .nav-btn:hover {
+    background: rgba(255,255,255,0.14);
+  }
+  
+  /* SECTIONS */
+  
+  .screen {
+    display: block;
+    margin-bottom: 34px;
+    scroll-margin-top: 18px;
+  }
+  
+  /* LAYOUT */
+  
+  .layout-two {
+    display: grid;
+    gap: 28px;
+  }
+  
+  /* CARDS */
+  
+  .glass-card {
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,0.09),
+      rgba(255,255,255,0.06)
+    );
+    border: 1px solid var(--panel-border);
+    border-radius: 26px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(16px);
+  }
+  
+  .panel,
+  .preview-panel,
+  .calendar-card {
+    padding: 26px;
+  }
+  
+  .panel-head h2,
+  .panel-head h3 {
+    margin: 0;
+  }
+  
+  .panel-head p {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  
+  /* FORM */
+  
+  .form-block {
+    margin-top: 26px;
+  }
+  
+  .form-block label {
+    display: block;
+    margin-bottom: 12px;
+  }
+  
+  .helper {
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .color-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  input[type="color"] {
+    width: 64px;
+    height: 48px;
+    border: none;
+    padding: 4px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.08);
+    cursor: pointer;
+  }
+  
+  input[type="range"] {
+    width: 100%;
+  }
+  
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    border-radius: 18px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    color: white;
+  }
+  
+  .primary-btn,
+  .secondary-btn,
+  .tab-btn {
+    cursor: pointer;
+  }
+  
+  .primary-btn {
+    width: 100%;
+    margin-top: 28px;
+    padding: 16px;
+    border-radius: 18px;
+    border: none;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,0.25),
+      rgba(255,255,255,0.1)
+    );
+    color: white;
+  }
+  
+  .secondary-btn,
+  .tab-btn {
+    padding: 12px 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.07);
+    color: white;
+  }
+  
+  /* CANVAS */
+  
+  .canvas-wrap {
+    margin-top: 20px;
+    min-height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+  
+  .canvas-hint {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: .8rem;
+    color: rgba(255,255,255,0.75);
+    background: rgba(0,0,0,0.28);
+    padding: 8px 11px;
+    border-radius: 999px;
+  }
+  
+  canvas {
+    width: min(100%, 320px);
+  }
+  
+  /* PREVIEW */
+  
+  .preview-meta {
+    margin-top: 18px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .pill {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.12);
+    font-size: .85rem;
+  }
+  
+  .pill.soft {
+    background: rgba(255,255,255,0.08);
+  }
+  
+  /* LIBRARY */
+  
+  .library-top {
+    margin-bottom: 26px;
+  }
+  
+  .library-tabs {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  
+  .entries-list {
+    display: grid;
+    gap: 18px;
+  }
+  
+  .library-view {
+    display: block;
+  }
+  
+  .library-view:not(.active) {
+    display: none;
+  }
+  
+  .calendar-grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 10px;
+  }
+  
+  .calendar-cell {
+    aspect-ratio: 1;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .75rem;
+  }
+  
+  /* MOBILE */
+  
+  @media (max-width: 430px) {
+    body {
+      padding: 0;
+    }
+  
+    .app-shell {
+      width: 100%;
+      height: 100vh;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+    }
+  }

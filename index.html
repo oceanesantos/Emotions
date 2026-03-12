@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Paysage intérieur</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+  <div class="bg-orb orb-c"></div>
+
+  <main class="app-shell">
+    <div class="iphone-header">
+      <div class="iphone-status-bar">
+        <div class="status-left">
+          <span id="iphone-time">9:41</span>
+        </div>
+
+        <div class="status-right">
+          <div class="signal">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="wifi">
+            <span class="wifi-arc arc1"></span>
+            <span class="wifi-arc arc2"></span>
+            <span class="wifi-dot"></span>
+          </div>
+
+          <div class="battery">
+            <div class="battery-level"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-content">
+      <header class="hero" id="top">
+        <div class="hero-text">
+          <p class="eyebrow">Prototype immersif · journal émotionnel organique</p>
+          <h1>Paysage intérieur</h1>
+          <p class="lead">
+            Définis la matière visuelle de tes émotions, sculpte une forme organique,
+            puis conserve chaque ressenti dans une cartographie sensible.
+          </p>
+        </div>
+
+        <nav class="top-nav">
+          <a class="nav-btn" href="#screen-onboarding">Onboarding</a>
+          <a class="nav-btn" href="#screen-journal">Journal</a>
+          <a class="nav-btn" href="#screen-library">Bibliothèque</a>
+        </nav>
+      </header>
+
+      <section class="screen" id="screen-onboarding">
+        <div class="layout-two">
+          <article class="glass-card panel">
+            <div class="panel-head">
+              <h2>Définir la signature émotionnelle</h2>
+              <p>Une base sensible qui influencera toutes les formes du journal.</p>
+            </div>
+
+            <div class="form-block">
+              <label>Choisir une émotion</label>
+              <div class="chip-group" id="onboarding-emotions"></div>
+            </div>
+
+            <div class="form-block">
+              <label for="base-color">Couleur émotionnelle</label>
+              <div class="color-row">
+                <input type="color" id="base-color" value="#8BB8FF" />
+                <span id="color-value">#8BB8FF</span>
+              </div>
+            </div>
+
+            <div class="form-block">
+              <label>Intensité</label>
+              <input type="range" id="base-intensity" min="1" max="100" value="42" />
+              <div class="sub-value">
+                <span id="base-intensity-value">42</span>/100
+              </div>
+            </div>
+
+            <div class="form-block">
+              <label>Dessiner la forme</label>
+              <p class="helper">
+                Glisse sur la zone de visualisation pour sculpter la forme.
+              </p>
+              <button class="secondary-btn" id="reset-shape-btn" type="button">
+                Réinitialiser la forme
+              </button>
+            </div>
+
+            <div class="form-block">
+              <label>Texture émotionnelle</label>
+              <div class="chip-group" id="texture-choices"></div>
+            </div>
+
+            <button class="primary-btn" id="save-signature-btn" type="button">
+              Enregistrer la signature émotionnelle
+            </button>
+          </article>
+
+          <article class="glass-card preview-panel">
+            <div class="panel-head">
+              <h2>Aperçu vivant</h2>
+              <p>Cette forme respire selon tes réglages.</p>
+            </div>
+
+            <div class="canvas-wrap interactive" id="canvas-interactive-zone">
+              <canvas id="blob-canvas" width="520" height="520"></canvas>
+              <div class="canvas-hint">Glisse ici pour modeler la forme</div>
+            </div>
+
+            <div class="preview-meta">
+              <span class="pill" id="preview-emotion-pill">Tristesse</span>
+              <span class="pill soft" id="preview-texture-pill">Brume</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-journal">
+        <div class="layout-two">
+          <article class="glass-card panel">
+            <div class="panel-head">
+              <h2>Journal émotionnel</h2>
+              <p>Dépose ton émotion du moment.</p>
+            </div>
+
+            <div class="form-block">
+              <label>Émotion</label>
+              <div class="chip-group" id="journal-emotions"></div>
+            </div>
+
+            <div class="form-block">
+              <label>Moment de la journée</label>
+              <div class="chip-group" id="time-choices"></div>
+            </div>
+
+            <div class="form-block">
+              <label>Précision émotionnelle</label>
+              <div class="chip-group" id="detail-choices"></div>
+            </div>
+
+            <div class="form-block">
+              <label>Intensité</label>
+              <input type="range" id="journal-intensity" min="1" max="100" value="50" />
+              <div class="sub-value">
+                <span id="journal-intensity-value">50</span>/100
+              </div>
+            </div>
+
+            <div class="form-block">
+              <label>Notes</label>
+              <textarea id="journal-notes" placeholder="Écris ce que tu ressens..."></textarea>
+            </div>
+
+            <button class="primary-btn" id="save-entry-btn" type="button">
+              Enregistrer l’émotion
+            </button>
+          </article>
+
+          <article class="glass-card preview-panel">
+            <div class="panel-head">
+              <h2>Visualisation</h2>
+              <p>La forme réagit à ton émotion.</p>
+            </div>
+
+            <div class="canvas-wrap">
+              <canvas id="journal-preview-canvas" width="520" height="520"></canvas>
+            </div>
+
+            <div class="preview-meta">
+              <span class="pill" id="journal-preview-emotion">Joie</span>
+              <span class="pill soft" id="journal-preview-detail">Sérénité</span>
+              <span class="pill soft" id="journal-preview-time">Matin</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="screen" id="screen-library">
+        <div class="library-top">
+          <div>
+            <h2>Bibliothèque émotionnelle</h2>
+            <p>Toutes tes émotions enregistrées apparaissent ici.</p>
+          </div>
+
+          <div class="library-tabs">
+            <button class="tab-btn active" data-library-view="timeline" type="button">
+              Chronologie
+            </button>
+            <button class="tab-btn" data-library-view="calendar" type="button">
+              Calendrier
+            </button>
+          </div>
+        </div>
+
+        <div class="library-view active" id="view-timeline">
+          <div id="entries-list" class="entries-list"></div>
+        </div>
+
+        <div class="library-view" id="view-calendar">
+          <div class="glass-card calendar-card">
+            <div class="panel-head">
+              <h3>Carte émotionnelle</h3>
+              <p>Activité émotionnelle des derniers jours.</p>
+            </div>
+            <div id="calendar-grid" class="calendar-grid"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
