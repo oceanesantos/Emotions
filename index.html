@@ -1,294 +1,251 @@
-<!-- ========================= -->
-<!-- HTML COMPLET -->
-<!-- ========================= -->
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paysage Intérieur</title>
+  <title>Anima — Paysage Intérieur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;1,9..144,200;1,9..144,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="bg-gradient"></div>
 
 <div class="app">
 
-  <!-- ONBOARDING -->
-
+  <!-- ══════════════════════════════════
+       ONBOARDING
+  ══════════════════════════════════ -->
   <section class="view active" id="view-onboarding">
 
-    <!-- STEP 1 -->
-
-    <div class="onboarding-step active" data-step="1">
-
-      <div class="content">
-
-        <span class="tag">Bienvenue</span>
-
-        <h1>
-          Qu’attends-tu de cet espace ?
-        </h1>
-
-        <p class="subtitle">
-          Choisis ce qui résonne avec toi aujourd’hui.
-        </p>
-
-        <div class="choice-grid" id="expectations"></div>
-
-        <div class="feedback-card" id="feedback-card">
-          Choisis une intention.
+    <!-- STEP 0 — SPLASH -->
+    <div class="onboarding-step active" data-step="0">
+      <div class="splash-screen">
+        <div class="splash-orb" id="splash-orb"></div>
+        <div class="splash-text">
+          <h1 class="app-name">Anima</h1>
+          <p class="app-tagline">ton espace émotionnel</p>
         </div>
-
-        <button class="primary-btn" id="to-step-2">
-          Continuer
-        </button>
-
+        <div class="splash-actions">
+          <button class="primary-btn large" id="to-step-1">Commencer</button>
+          <button class="ghost-btn" id="splash-login">J'ai déjà un espace</button>
+        </div>
       </div>
-
     </div>
 
-    <!-- STEP 2 -->
-
-    <div class="onboarding-step" data-step="2">
-
+    <!-- STEP 1 — INTENTION -->
+    <div class="onboarding-step" data-step="1">
+      <div class="ob-header">
+        <div class="ob-progress"><div class="ob-fill" style="width:25%"></div></div>
+      </div>
       <div class="content">
+        <span class="tag">Bienvenue</span>
+        <h1>Qu'attends-tu de cet espace&nbsp;?</h1>
+        <p class="subtitle">Choisis ce qui résonne avec toi aujourd'hui.</p>
+        <div class="choice-grid" id="expectations"></div>
+        <div class="feedback-card" id="feedback-card">Choisis une intention.</div>
+        <button class="primary-btn" id="to-step-2">Continuer</button>
+      </div>
+    </div>
 
-        <span class="tag">Création</span>
+    <!-- STEP 2 — CRÉER SON ÉMOTION -->
+    <div class="onboarding-step" data-step="2">
+      <div class="ob-header">
+        <button class="back-btn" data-back="1">←</button>
+        <div class="ob-progress"><div class="ob-fill" style="width:50%"></div></div>
+      </div>
+      <div class="content">
+        <span class="tag">Ton émotion</span>
+        <h1>Crée ta première émotion</h1>
+        <p class="subtitle">Donne-lui un nom, une couleur, une forme. Elle t'appartient.</p>
 
-        <h1>
-          Donne une forme à tes émotions
-        </h1>
-
-        <div class="mode-tabs">
-
-          <button class="mode-btn active" data-mode="draw">
-            Dessiner
-          </button>
-
-          <button class="mode-btn" data-mode="modulate">
-            Moduler
-          </button>
-
-          <button class="mode-btn" data-mode="gallery">
-            Galerie
-          </button>
-
+        <!-- Nom & description -->
+        <div class="field-group">
+          <label class="field-label">Comment tu l'appelles ?</label>
+          <input class="text-input italic-input" id="custom-emo-name" type="text" placeholder="Ex : Tiédeur, Saudade, Flotter…" maxlength="32">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Une phrase pour la décrire</label>
+          <input class="text-input" id="custom-emo-desc" type="text" placeholder="Comme entre deux eaux…" maxlength="60">
         </div>
 
-        <!-- DESSIN -->
-
-        <div id="draw-tools">
-
-          <div class="draw-toolbar">
-
-            <button class="tool-btn active" data-brush="soft">
-              Feutre doux
-            </button>
-
-            <button class="tool-btn" data-brush="marker">
-              Marker
-            </button>
-
-            <button class="tool-btn" data-brush="glow">
-              Glow
-            </button>
-
-            <button class="tool-btn" data-brush="spray">
-              Spray
-            </button>
-
-            <button class="tool-btn" data-brush="eraser">
-              Gomme
-            </button>
-
+        <!-- Couleurs -->
+        <div class="field-group">
+          <label class="field-label">Sa palette (jusqu'à 3 couleurs)</label>
+          <div class="color-palette-row" id="ob-palette"></div>
+          <div class="selected-colors-row" id="ob-selected-colors">
+            <span class="no-color-hint">Aucune couleur choisie</span>
           </div>
-
-          <div class="brush-size">
-            <label>Taille</label>
-            <input type="range" id="brush-size" min="2" max="40" value="12">
-          </div>
-
         </div>
 
-        <!-- GALERIE TEMPLATES -->
-
-        <div class="template-gallery" id="template-gallery"></div>
-
-        <!-- CANVAS -->
-
-        <div class="canvas-container" id="canvas-zone">
-
-          <canvas id="emotion-canvas" width="520" height="520"></canvas>
-
+        <!-- Aperçu live -->
+        <div class="ob-preview-wrap">
+          <canvas id="ob-preview-canvas" width="280" height="140"></canvas>
+          <div class="ob-preview-label" id="ob-preview-label">—</div>
         </div>
 
-        <!-- CONTROLS -->
+        <button class="primary-btn" id="to-step-3">Continuer</button>
+      </div>
+    </div>
 
-        <div class="editor-controls">
+    <!-- STEP 3 — DESSIN -->
+    <div class="onboarding-step" data-step="3">
+      <div class="ob-header">
+        <button class="back-btn" data-back="2">←</button>
+        <div class="ob-progress"><div class="ob-fill" style="width:75%"></div></div>
+      </div>
+      <div class="content">
+        <span class="tag">Dessine-la</span>
+        <h1>Donne-lui une forme</h1>
+        <p class="subtitle">Trace ce qu'elle évoque — ou laisse vide pour commencer.</p>
 
-          <div class="control-block">
-            <label>Émotion</label>
-            <div class="chips" id="emotion-choices"></div>
-          </div>
+        <!-- Outils -->
+        <div class="draw-toolbar" id="ob-draw-toolbar">
+          <button class="tool-btn active" data-brush="soft">Doux</button>
+          <button class="tool-btn" data-brush="marker">Marker</button>
+          <button class="tool-btn" data-brush="glow">Glow</button>
+          <button class="tool-btn" data-brush="spray">Spray</button>
+          <button class="tool-btn" data-brush="eraser">Gomme</button>
+        </div>
+        <div class="brush-size">
+          <label>Taille du pinceau</label>
+          <input type="range" id="ob-brush-size" min="2" max="40" value="12">
+        </div>
+        <!-- Couleurs du dessin depuis palette choisie -->
+        <div class="draw-color-strip" id="ob-draw-colors"></div>
 
-          <div class="control-block">
-            <label>Couleur</label>
-            <input type="color" id="color-picker" value="#8BB8FF">
-          </div>
-
-          <div class="control-block">
-            <label>Intensité</label>
-            <input type="range" id="intensity-range" min="1" max="100" value="50">
-          </div>
-
+        <div class="canvas-container" id="ob-canvas-zone">
+          <canvas id="ob-draw-canvas" width="520" height="300"></canvas>
         </div>
 
         <div class="actions">
-
-          <button class="ghost-btn" id="skip-step">
-            Passer
-          </button>
-
-          <button class="primary-btn" id="to-step-3">
-            Continuer
-          </button>
-
+          <button class="ghost-btn" id="ob-skip-draw">Passer cette étape</button>
+          <button class="primary-btn" id="to-step-4">Continuer</button>
         </div>
-
       </div>
-
     </div>
 
-    <!-- STEP 3 -->
-
-    <div class="onboarding-step" data-step="3">
-
-      <div class="center-screen">
-
-        <span class="tag">Ton espace est prêt</span>
-
-        <h1>
-          C’est parti pour prendre du temps pour toi.
-        </h1>
-
-        <p class="subtitle">
-          Explore librement tes émotions.
-        </p>
-
-        <button class="primary-btn large" id="start-app">
-          Commencer l’expérience
-        </button>
-
+    <!-- STEP 4 — CONFIRMATION -->
+    <div class="onboarding-step" data-step="4">
+      <div class="ob-header">
+        <button class="back-btn" data-back="3">←</button>
+        <div class="ob-progress"><div class="ob-fill" style="width:100%"></div></div>
       </div>
-
+      <div class="center-screen">
+        <div class="final-emotion-preview">
+          <canvas id="final-orb-canvas" width="200" height="200"></canvas>
+        </div>
+        <span class="tag">Ton espace est prêt</span>
+        <h1 id="final-emo-name" class="final-name">—</h1>
+        <p class="subtitle" id="final-emo-desc">—</p>
+        <button class="primary-btn large" id="start-app">Commencer l'expérience</button>
+      </div>
     </div>
 
   </section>
 
-  <!-- APP -->
-
+  <!-- ══════════════════════════════════
+       APP
+  ══════════════════════════════════ -->
   <section class="view" id="view-app">
 
     <!-- CREATE -->
-
     <div class="screen active" id="screen-create">
-
       <div class="screen-header">
         <span class="tag">Créer</span>
         <h2>Ton émotion du moment</h2>
       </div>
 
-      <div class="glass-card">
-
-        <textarea id="journal-notes" placeholder="Dépose ce que tu ressens..."></textarea>
-
-        <button class="primary-btn" id="save-entry">
-          Sauvegarder
-        </button>
-
+      <div class="mode-tabs">
+        <button class="mode-btn active" data-mode="draw">Dessiner</button>
+        <button class="mode-btn" data-mode="modulate">Moduler</button>
+        <button class="mode-btn" data-mode="gallery">Galerie</button>
       </div>
 
+      <div id="draw-tools">
+        <div class="draw-toolbar">
+          <button class="tool-btn active" data-brush="soft">Feutre doux</button>
+          <button class="tool-btn" data-brush="marker">Marker</button>
+          <button class="tool-btn" data-brush="glow">Glow</button>
+          <button class="tool-btn" data-brush="spray">Spray</button>
+          <button class="tool-btn" data-brush="eraser">Gomme</button>
+        </div>
+        <div class="brush-size">
+          <label>Taille</label>
+          <input type="range" id="brush-size" min="2" max="40" value="12">
+        </div>
+      </div>
+
+      <div class="template-gallery" id="template-gallery"></div>
+
+      <div class="canvas-container" id="canvas-zone">
+        <canvas id="emotion-canvas" width="520" height="520"></canvas>
+      </div>
+
+      <div class="editor-controls">
+        <div class="control-block">
+          <label>Émotion</label>
+          <div class="chips" id="emotion-choices"></div>
+        </div>
+        <div class="control-block">
+          <label>Couleur</label>
+          <input type="color" id="color-picker" value="#8BB8FF">
+        </div>
+        <div class="control-block">
+          <label>Intensité</label>
+          <input type="range" id="intensity-range" min="1" max="100" value="50">
+        </div>
+      </div>
+
+      <div class="glass-card" style="margin-top:20px">
+        <textarea id="journal-notes" placeholder="Dépose ce que tu ressens…"></textarea>
+        <button class="primary-btn" id="save-entry" style="margin-top:12px">Sauvegarder</button>
+      </div>
     </div>
 
     <!-- GALLERY -->
-
     <div class="screen" id="screen-gallery">
-
       <div class="screen-header">
         <span class="tag">Galerie</span>
         <h2>Tes créations émotionnelles</h2>
       </div>
-
       <div class="entries-list" id="entries-list"></div>
-
     </div>
 
     <!-- INSIGHTS -->
-
     <div class="screen" id="screen-insights">
-
       <div class="screen-header">
         <span class="tag">Évolution</span>
         <h2>Fluctuation émotionnelle</h2>
       </div>
-
       <div class="glass-card">
-
         <div class="chart-bars" id="chart-bars"></div>
-
       </div>
-
     </div>
 
     <!-- PROFILE -->
-
     <div class="screen" id="screen-profile">
-
       <div class="screen-header">
         <span class="tag">Profil</span>
         <h2>Ton parcours émotionnel</h2>
       </div>
-
       <div class="glass-card profile-card">
-
-        <div class="profile-avatar"></div>
-
-        <p>
-          Continue d’explorer ton paysage intérieur.
-        </p>
-
+        <div class="profile-avatar" id="profile-avatar"></div>
+        <h3 id="profile-emo-name" style="margin-bottom:8px">—</h3>
+        <p class="subtitle" id="profile-emo-desc">Continue d'explorer ton paysage intérieur.</p>
       </div>
-
     </div>
 
     <!-- NAV -->
-
     <nav class="bottom-nav">
-
-      <button class="nav-item active" data-screen="create">
-        Créer
-      </button>
-
+      <button class="nav-item active" data-screen="create">Créer</button>
       <button class="nav-item" data-screen="gallery">
-
         Galerie
-
         <span class="notif-dot" id="gallery-dot"></span>
-
       </button>
-
-      <button class="nav-item" data-screen="insights">
-        Évolution
-      </button>
-
-      <button class="nav-item" data-screen="profile">
-        Profil
-      </button>
-
+      <button class="nav-item" data-screen="insights">Évolution</button>
+      <button class="nav-item" data-screen="profile">Profil</button>
     </nav>
 
   </section>
