@@ -1,4 +1,4 @@
-# Anima — Paysage Intérieur
+# Créer des émotions
 
 > Une expérience numérique émotionnelle, introspective et créative.
 
