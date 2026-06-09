@@ -6,7 +6,7 @@
 
 ## À propos du projet
 
-**Anima** est une application web mobile-first conçue comme un espace émotionnel personnel. Elle permet à l'utilisateur d'explorer, ressentir et exprimer ses émotions à travers une approche artistique et sensorielle — sans chercher à les analyser ou les corriger.
+Une application web mobile-first conçue comme un espace émotionnel personnel. Elle permet à l'utilisateur d'explorer, ressentir et exprimer ses émotions à travers une approche artistique et sensorielle — sans chercher à les analyser ou les corriger.
 
 Le projet s'inscrit dans une démarche de *slow digital* : offrir une pause contemplative dans un environnement numérique souvent rapide et surstimulant.
 
@@ -17,7 +17,6 @@ Le projet s'inscrit dans une démarche de *slow digital* : offrir une pause cont
 ## Structure des fichiers
 
 ```
-anima/
 ├── index.html      # Structure HTML complète (onboarding + app)
 ├── style.css       # Design system sombre, variables CSS, animations
 └── script.js       # Logique interactive, canvas, état global
